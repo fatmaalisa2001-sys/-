@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>سنبلات الإتقان 🌸</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap');
+*{box-sizing:border-box}
+body{
+  margin:0; min-height:100vh; font-family:"Cairo",sans-serif;
+  background:linear-gradient(145deg,#fff7fb,#f7f2ff 55%,#fffbea);
+  color:#5d466b; overflow-x:hidden;
+}
+body:before,body:after{
+  content:"";position:fixed;border-radius:50%;z-index:-1;opacity:.45
+}
+body:before{width:280px;height:280px;background:#ffd8eb;top:-90px;right:-70px}
+body:after{width:320px;height:320px;background:#e6ddff;bottom:-120px;left:-90px}
+.container{width:min(92%,720px);margin:auto;padding:28px 0 40px}
+.header{text-align:center;margin:10px 0 24px}
+.logo{font-size:55px;filter:drop-shadow(0 5px 8px #e8cce0)}
+h1{margin:5px 0 4px;font-size:31px;color:#8b4f91}
+.subtitle{margin:0;color:#927d9c;font-size:15px}
+.card{
+ background:rgba(255,255,255,.9);border:2px solid #f2dcec;border-radius:28px;
+ padding:24px;box-shadow:0 14px 35px rgba(120,75,130,.12);backdrop-filter:blur(8px)
+}
+label{display:block;font-weight:700;margin-bottom:10px;color:#744c7d}
+select{
+ width:100%;padding:16px 18px;border:2px solid #ecd7e9;border-radius:17px;
+ background:#fff;font-family:inherit;font-size:16px;color:#604868;outline:none
+}
+button{
+ width:100%;border:0;border-radius:18px;padding:15px;margin-top:15px;
+ font-family:inherit;font-weight:800;font-size:17px;cursor:pointer;
+ background:linear-gradient(135deg,#c783d2,#9d72c8);color:white;
+ box-shadow:0 8px 18px rgba(145,100,165,.25)
+}
+button:active{transform:scale(.98)}
+.result{display:none;text-align:center}
+.name{font-size:28px;color:#7d4d88;font-weight:800;margin:4px 0 2px}
+.welcome{font-size:14px;color:#9a819e}
+.flower{font-size:54px;margin:8px 0}
+.badge{
+ display:inline-block;padding:9px 22px;border-radius:30px;
+ background:#fff0f8;border:2px solid #f1d5e7;color:#a34f83;
+ font-weight:800;font-size:22px;margin:8px 0 15px
+}
+.stars{font-size:31px;letter-spacing:4px;margin:4px 0 12px}
+.message{
+ background:#fff8fc;border-radius:20px;padding:17px;border:1px solid #f3dfeb;
+ line-height:1.9;font-size:15px
+}
+.back{background:#eee5f5;color:#70577a;box-shadow:none}
+.footer{text-align:center;color:#aa91aa;font-size:12px;margin-top:18px}
+.hidden{display:none}
+@media(max-width:500px){h1{font-size:26px}.card{padding:19px}.name{font-size:24px}}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <div class="logo">🌸🌾</div>
+    <h1>سنبلات الإتقان</h1>
+    <p class="subtitle">اختاري اسمكِ لتشاهدي تقييمكِ ✨</p>
+  </div>
+
+  <section class="card" id="chooseCard">
+    <label for="student">🌷 اختاري اسمكِ</label>
+    <select id="student">
+      <option value="">— اختاري اسمكِ من القائمة —</option>
+      <option>راسيل ضعن</option>
+      <option>تاليا طليمات</option>
+      <option>فاطمة زيدان</option>
+      <option>سيلين العلي</option>
+      <option>تالية علاف</option>
+      <option>ربى الحنيني</option>
+      <option>سنا الأبرش</option>
+    </select>
+    <button onclick="showResult()">🌟 أريد رؤية تقييمي</button>
+    <div class="footer">كل خطوة صغيرة تقرّبكِ من الإتقان 💗</div>
+  </section>
+
+  <section class="card result" id="resultCard">
+    <div class="flower" id="flower">🌷</div>
+    <div class="welcome">أحسنتِ يا</div>
+    <div class="name" id="resultName"></div>
+    <div class="badge" id="resultRating"></div>
+    <div class="stars" id="stars"></div>
+    <div class="message" id="message"></div>
+    <button class="back" onclick="goBack()">🌸 اختيار اسم آخر</button>
+  </section>
+</div>
+
+<script>
+const ratings = {
+  "راسيل ضعن":"تفوق",
+  "تاليا طليمات":"جيد جدا",
+  "فاطمة زيدان":"جيد",
+  "سيلين العلي":"جيد جدا",
+  "تالية علاف":"تفوق",
+  "ربى الحنيني":"تفوق",
+  "سنا الأبرش":"تفوق"
+};
+
+function showResult(){
+  const name=document.getElementById("student").value;
+  if(!name){
+    alert("🌷 اختاري اسمكِ أولاً");
+    return;
+  }
+  const rating=ratings[name];
+  const data={
+    "تفوق":{stars:"★★★★★",flower:"🌻",msg:"رائع جدًا! 🌟 أداؤكِ مميز، استمري بهذا الاجتهاد والتألّق. أنتِ قادرة على المزيد! 💛"},
+    "جيد جدا":{stars:"★★★★☆",flower:"🌷",msg:"أحسنتِ! 🌸 نتيجتكِ جميلة جدًا، ومع القليل من الاستمرار والمثابرة ستصلين إلى الإتقان بإذن الله. 💗"},
+    "جيد":{stars:"★★★☆☆",flower:"🌼",msg:"أحسنتِ يا بطلة! 🌼 لديكِ بداية جميلة، واصلي التدريب والاجتهاد وستتقدمين أكثر فأكثر. 💕"}
+  };
+  document.getElementById("resultName").textContent=name;
+  document.getElementById("resultRating").textContent=rating;
+  document.getElementById("stars").textContent=data[rating].stars;
+  document.getElementById("flower").textContent=data[rating].flower;
+  document.getElementById("message").textContent=data[rating].msg;
+  document.getElementById("chooseCard").style.display="none";
+  document.getElementById("resultCard").style.display="block";
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function goBack(){
+  document.getElementById("resultCard").style.display="none";
+  document.getElementById("chooseCard").style.display="block";
+  document.getElementById("student").value="";
+}
+</script>
+</body>
+</html>
